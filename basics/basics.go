@@ -82,7 +82,58 @@ func main() {
 	yearsUntilAdult, yearUntilDrinking := yearsUntilEvents(15)
 	fmt.Println(yearUntilDrinking, yearsUntilAdult)
 
+	// Structs better to not use them in the functions declare them else where
+
+
+	type Engine struct {
+		volume float32; 
+		cylinders int	
+	} 
+	type Car struct {
+		engine Engine	
+	} 
+	myCar := Car{Engine{volume: 1.2, cylinders: 6} }
+	myCarEngineVolume := myCar.engine.cylinders
+
+	fmt.Printf("%v - It's the engine volume of my car", myCarEngineVolume)
+
+	//  ANONYMOUS struct
+	// myCar := struct {
+	//   Make string
+	//   Model string
+	// } {
+	//   Make: "tesla",
+	//   Model: "model 3",
+	// }
+
 }
+
+// Struct test
+// type messageToSend struct {
+// 	message   string
+// 	sender    user
+// 	recipient user
+// }
+
+// type user struct {
+// 	name   string
+// 	number int
+// }
+
+// func canSendMessage(mToSend messageToSend) bool {
+// 	// ?
+// 	sender := mToSend.sender
+// 	recipient := mToSend.recipient 
+
+// 	if sender.name == "" || recipient.name == "" {
+// 		return false
+// 	}
+
+// 	if sender.number == 0 || recipient.number == 0 {
+// 		return false
+// 	} 
+// 	return true
+// }
 
 func getNames()(string, string) {
 	return "John", "Smith"
@@ -92,7 +143,6 @@ func yearsUntilEvents(age int)(yearsUntilAdult, yearsUntilDrinking int) {
 	// Here we will return default value for an int which is 0
 	return yearsUntilAdult, yearsUntilDrinking
 }
-
 
 
 func increment(x int) int {
