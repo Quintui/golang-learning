@@ -85,16 +85,9 @@ func main() {
 	// Structs better to not use them in the functions declare them else where
 
 
-	type Engine struct {
-		volume float32; 
-		cylinders int	
-	} 
-	type Car struct {
-		engine Engine	
-	} 
 	myCar := Car{Engine{volume: 1.2, cylinders: 6} }
 	myCarEngineVolume := myCar.engine.cylinders
-
+	fmt.Println(myCar.calculateSomething())
 	fmt.Printf("%v - It's the engine volume of my car", myCarEngineVolume)
 
 	//  ANONYMOUS struct
@@ -108,6 +101,17 @@ func main() {
 
 }
 
+
+	type Engine struct {
+		volume float32; 
+		cylinders int	
+	} 
+	type Car struct {
+		engine Engine	
+	} 
+	func (c Car) calculateSomething() int{	
+		return c.engine.cylinders + int(c.engine.volume)
+	}
 // Struct test
 // type messageToSend struct {
 // 	message   string
