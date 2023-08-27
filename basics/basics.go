@@ -65,7 +65,7 @@ func main() {
 		fmt.Println("basic length is greater then max")
 	}
 	
-
+	fmt.Println("=========================================================")
 	// Functions 
 	// fmt.Fprintln(concat("Hello", "World"))
 	fmt.Println(sub(12, 3))
@@ -83,7 +83,7 @@ func main() {
 	fmt.Println(yearUntilDrinking, yearsUntilAdult)
 
 	// Structs better to not use them in the functions declare them else where
-
+	fmt.Println("=========================================================")
 
 	myCar := Car{Engine{volume: 1.2, cylinders: 6} }
 	myCarEngineVolume := myCar.engine.cylinders
@@ -98,20 +98,132 @@ func main() {
 	//   Make: "tesla",
 	//   Model: "model 3",
 	// }
+	fmt.Println(	getUserExpenses(User{
+		userName: "Chad",
+		email: "chad@gmail.com",
+		costPerSMS: 1.2,
+		totalMessages: 22,
+	}))
+	fmt.Println(getUserExpenses(User{
+		userName: "Chad Player",
+		email: "chadplayer@gmail.com",
+		costPerSMS: 1,
+		totalMessages: 432,
+	}))
+	fmt.Println("=========================================================")
+
+	// if 12 < 11 {
+	// 	return errors.New("STOP IT, IT'S NOT POSSIBLE")
+	// }
+	for i:= 0; i < 10; i++ {
+		fmt.Printf("Counter: %v", i)
+	}
+
+	// totalCost := 74 
+ 
+	//While loop in go
+	// for totalCost > 1 {
+	// 	// Do something
+	// } 
+	fmt.Println("=================================================================")
+	fmt.Println("Lists:")
+	itemList := [3]string{"Javascript 5/10", "I love go lang","Rust is veeery interesting"}
+	fmt.Println(itemList[0])
+	fmt.Println("Slices:")
+	goodLangSlices := itemList[1:]
+	allLanguage := itemList[:]
+	fmt.Println(goodLangSlices)
+	fmt.Println(allLanguage)
+
+	newSlice := make([]int, 10)
+	fmt.Println(newSlice)
+	fmt.Println("Slice len", len(newSlice))
+
+	println(sumSlice(1,2,3,4,6))
+
+
+	newLanguages := append(allLanguage, "Zig")
+	fmt.Println(newLanguages)
+
+
+	// Maps
+	fmt.Println("===========================================================")
+	fmt.Println("MAPS")
+
+	map1 := make(map[string]int)
+	map1["Key1"] = 1
+	fmt.Println(map1)
+
+	map2 := map[string]int{
+		"KEY1": 12,
+		"KEY2": 13,
+	}
+	fmt.Println(map2)
+	delete(map2, "KEY1")
+
+	elem, ok := map2["KEY2"]
+
+	fmt.Println(elem, ok)
 
 }
 
-
-	type Engine struct {
-		volume float32; 
-		cylinders int	
-	} 
-	type Car struct {
-		engine Engine	
-	} 
-	func (c Car) calculateSomething() int{	
-		return c.engine.cylinders + int(c.engine.volume)
+func sumSlice(nums ...int)int {
+	total := 0	
+	for i :=0; i < len(nums); i++ {
+	total = total + nums[i]
 	}
+	return total 
+}
+
+func getUserExpenses(u userData) string {
+	return fmt.Sprintf("%s, %.1f - Here is customer expenses", u.getUserData(),u.getTotalMessageCost())
+}
+
+type userData interface {
+	getTotalMessageCost() float64
+	getUserData() string
+} 
+type User struct {
+	userName string
+	email string
+	costPerSMS float64
+	totalMessages int
+}
+
+func (u User) getTotalMessageCost() float64 {
+	return u.costPerSMS * float64(u.totalMessages)
+} 
+func (u User) getUserData() string {
+	return fmt.Sprintf("User: %s, Email: %s", u.userName, u.email) 
+} 
+
+
+
+type Player struct {
+	playerName string
+	email string
+	costPerSMS float64
+	totalMessages int 
+}
+
+
+func (p Player) getTotalMessageCost() float64 {
+	return p.costPerSMS * float64(p.totalMessages)
+} 
+
+func (p Player) getUserData() string {
+	return fmt.Sprintf("User: %s, Email: %s", p.playerName, p.email)
+} 
+type Engine struct {
+	volume float32; 
+	cylinders int	
+} 
+type Car struct {
+	engine Engine	
+} 
+func (c Car) calculateSomething() int{	
+	return c.engine.cylinders + int(c.engine.volume)
+}
 // Struct test
 // type messageToSend struct {
 // 	message   string
